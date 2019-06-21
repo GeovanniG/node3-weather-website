@@ -11,7 +11,11 @@ const forcast = (latitude, longitude, callback) => {
         } else {
             const temp = body.currently.temperature;
             const precip = body.currently.precipProbability;
-            callback(undefined, { temp, precip });
+            const summary = body.daily.data[0].summary;
+            const tempHigh = body.daily.data[0].temperatureHigh;
+            const tempLow = body.daily.data[0].temperatureLow;
+            const forecast = `${summary} It is ${temp} degrees out with a ${precip} chance of rain. The temperature high and low are ${tempHigh} degrees and ${tempLow} degrees, respectively.`;
+            callback(undefined, { forecast });
         }
     });
     
